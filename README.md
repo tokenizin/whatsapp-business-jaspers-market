@@ -125,7 +125,12 @@ node app.js
 
 #### 7. Configure your webhook subscription
 
-Use the `VERIFY_TOKEN` that you created in `.env` file and subscribe your webhook server's URL for WhatsApp webhooks in your developer page's _Configuration_ tab. Make sure to subscribe to the messages field. Note that the app listens to webhooks on the `/webhook` endpoint.
+1. In [Meta for Developers](https://developers.facebook.com/), open your app → **WhatsApp** → **Configuration**.
+2. Under **Webhook**, click **Edit** (or **Configure**).
+3. **Callback URL**: Your server’s public URL + `/webhook` (e.g. `https://YOUR-NGROK-SUBDOMAIN.ngrok.io/webhook`). The app only serves webhooks on `/webhook`.
+4. **Verify token**: Enter the exact string you set as `VERIFY_TOKEN` in `.env`. Meta will send this in the verification request; the app compares it to `config.verifyToken` and responds with the challenge to complete the handshake.
+5. Click **Verify and save** so Meta can confirm the endpoint (your app must be running and reachable via the callback URL).
+6. Subscribe to at least the **messages** field so the app receives incoming messages and status updates.
 
 #### 8. Test that your app setup is successful
 
